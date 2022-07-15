@@ -1,11 +1,16 @@
-﻿using CalculateMathProblem.Service_Layer;
+﻿using CalculateMathProblem.Domain;
+using CalculateMathProblem.Filters;
+using CalculateMathProblem.Service_Layer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CalculateMathProblem.Controllers
 {
+    [ServiceFilter(typeof(CalculateLogFilter))] // Controller level Filter
+
     [Route("api/[controller]")]
     [ApiController]
+
     public class MathController : ControllerBase
     {
         private readonly IMathService _mathService;
@@ -17,32 +22,32 @@ namespace CalculateMathProblem.Controllers
 
         [HttpPost]
         [Route("/add")]
-        public int Addition(int number_1, int number_2)
+        public int Addition([FromBody] domain input)
         {
-            return _mathService.add(number_1, number_2);
+            return _mathService.add(input.number_1, input.number_2);
         }
 
 
         [HttpPost]
         [Route("/subtract")]
-        public int Subtraction(int number_1, int number_2)
+        public int Subtraction([FromBody] domain input)
         {
-            return _mathService.subtract(number_1, number_2);
+            return _mathService.subtract(input.number_1, input.number_2);
         }
 
 
         [HttpPost]
         [Route("/multiply")]
-        public int Multiplication(int number_1, int number_2)
+        public int Multiplication([FromBody] domain input)
         {
-            return _mathService.multiply(number_1, number_2);
+            return _mathService.multiply(input.number_1, input.number_2);
         }
 
         [HttpPost]
         [Route("/divide")]
-        public double Division(double number_1, double number_2)
+        public int Division([FromBody] domain input)
         {
-            return _mathService.divide(number_1, number_2);
+            return _mathService.divide(input.number_1, input.number_2);
         }
 
 

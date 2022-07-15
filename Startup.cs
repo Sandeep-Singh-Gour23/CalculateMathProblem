@@ -1,3 +1,4 @@
+using CalculateMathProblem.Filters;
 using CalculateMathProblem.Service_Layer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,7 +34,8 @@ namespace CalculateMathProblem
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CalculateMathProblem", Version = "v1" });
             });
-            services.AddTransient<IMathService, MathService>();
+            services.AddScoped<IMathService, MathService>();
+            services.AddScoped<CalculateLogFilter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
