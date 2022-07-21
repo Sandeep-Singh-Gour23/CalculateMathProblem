@@ -35,6 +35,7 @@ namespace CalculateMathProblem
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CalculateMathProblem", Version = "v1" });
             });
             services.AddScoped<IMathService, MathService>();
+
             services.AddScoped<CalculateLogFilter>();
         }
 
